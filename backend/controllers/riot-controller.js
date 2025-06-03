@@ -1,6 +1,7 @@
 /*
  * Contains the Riot API routing logic for:
  * getAccountByRiotID
+ * getSummonerByPUUID
  * 
  */
 

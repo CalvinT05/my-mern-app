@@ -13,7 +13,7 @@ const {
     getSummonerByPUUID
 } = require('../controllers/riot-controller');
 
-// API routes
+// API routes from riot-controller.js
 router.get('/account/:gameName/:tagLine', getAccountByRiotID);
 router.get('/summoner/:PUUID', getSummonerByPUUID);
 

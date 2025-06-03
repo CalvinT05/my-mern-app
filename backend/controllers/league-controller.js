@@ -1,6 +1,6 @@
 /*
  * Contains the Riot API routing logic for:
- * getAccountByRiotId
+ * getRankByPUUID
  * 
  */
 
@@ -10,25 +10,24 @@
 const axios = require('axios'); // Imports Axios library
 
 /*
- * Get puuid
- * Inputs: game name, tag line
- * Returns: .json containing name, tag, puuid
+ * Get rank stats
+ * Inputs: PUUID
+ * Returns: .json containing rank stats
  * 
  */
-exports.getAccountByRiotId = async (req, res) => { // Define get request route
+exports.getRankByPUUID = async (req, res) => { // Define get request route
     // Debugging: Print request in console
-    console.log('Requesting account by Riot ID:');
+    console.log('Requesting rank by PUUID:');
     
     // Request parameters
-    const gameName = req.params.gameName;
-    const tagLine = req.params.tagLine;
+    const PUUID = req.params.PUUID;
 
     // Try to fetch data through API
     try {
         // Contruct request and get response
         const response = await axios.get(
             // Formatted API url to include parameters
-            `https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`,
+            `https://na1.api.riotgames.com/lol/league/v4/entries/by-puuid/${PUUID}`,
             // Header: API key
             {headers: {"X-Riot-Token": process.env.RIOT_API_KEY}}
         );

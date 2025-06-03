@@ -9,13 +9,11 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    getAccountByRiotID,
-    getSummonerByPUUID
-} = require('../controllers/riot-controller');
+    getRankByPUUID,
+} = require('../controllers/league-controller');
 
-// API routes
-router.get('/account/:gameName/:tagLine', getAccountByRiotID);
-router.get('/summoner/:PUUID', getSummonerByPUUID);
+// API routes from league-controller.js
+router.get('/rank/:PUUID', getRankByPUUID);
 
 // Export routes to other parts of program
 module.exports = router;
