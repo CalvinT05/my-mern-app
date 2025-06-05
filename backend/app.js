@@ -12,6 +12,8 @@ const cors = require('cors'); // import
 const riotRoutes = require('./routes/riot');
 const leagueRoutes = require('./routes/league');
 const csgoRoutes = require('./routes/csgo');
+const apexRoutes = require('./routes/apex');
+const owRoutes = require('./routes/ow');
 
 
 // Middleware
@@ -23,6 +25,8 @@ app.use(express.json()); // optional: parses JSON bodies
 app.use('/api/riot', riotRoutes);
 app.use('/api/league', leagueRoutes);
 app.use('/api/csgo', csgoRoutes);
+app.use('/api/apex', apexRoutes);
+app.use('/api/ow', owRoutes);
 
 // Root route
 app.get('/', (req, res) => {
