@@ -50,7 +50,7 @@ exports.getAccountByRiotID = async (req, res) => { // Define get request route
             // Formatted API url to include parameters
             `https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`,
             // Header: API key
-            {headers: {"X-Riot-Token": process.env.RIOT_API_KEY}}
+            {headers: {'X-Riot-Token': process.env.RIOT_API_KEY}}
         );
 
         // Debugging: Print response in console
