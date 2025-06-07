@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import LeagueAccount from './components/LeagueAccount';
 
 function App() {
+  const [gameName, setGameName] = useState('');
+  const [tagLine, setTagLine] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Riot Account Search</h1>
+      <input
+        type="text"
+        placeholder="Game Name"
+        value={gameName}
+        onChange={(e) => setGameName(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Tag Line"
+        value={tagLine}
+        onChange={(e) => setTagLine(e.target.value)}
+      />
+      <button onClick={() => setSubmitted(true)}>Search</button>
+
+      {submitted && <LeagueAccount gameName={gameName} tagLine={tagLine} />}
     </div>
   );
 }
