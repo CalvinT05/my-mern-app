@@ -1,6 +1,6 @@
 /*
  * Contains the Riot API routing logic for:
- * getRankByPUUID
+ * getRankByPuuid,
  * 
  */
 
@@ -34,7 +34,7 @@ const axios = require('axios'); // Imports Axios library
  * Returns: .json containing name, tag, puuid
  * 
  */
-exports.getAccountByRiotID = async (req, res) => { // Define get request route
+exports.getAccountByRiotId = async (req, res) => { // Define get request route
     // Debugging: Print request in console
     console.log('Requesting account by Riot ID:');
     
@@ -69,19 +69,19 @@ exports.getAccountByRiotID = async (req, res) => { // Define get request route
  * Returns: .json containing account ID, icon, revision date, summoner ID, name, summoner level
  * 
  */
-exports.getSummonerByPUUID = async (req, res) => { // Define get request route
+exports.getSummonerByPuuid = async (req, res) => { // Define get request route
     // Debugging: Print request in console
     console.log('Requesting summoner by PUUID:');
     
     // Request parameters
-    const PUUID = req.params.PUUID;
+    const puuid = req.params.puuid;
 
     // Try to fetch data through API
     try {
         // Contruct request and get response
         const response = await axios.get(
             // Formatted API url to include parameters
-            `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${PUUID}`,
+            `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`,
             // Header: API key
             {headers: {"X-Riot-Token": process.env.RIOT_API_KEY}}
         );
@@ -103,19 +103,19 @@ exports.getSummonerByPUUID = async (req, res) => { // Define get request route
  * Returns: .json containing rank stats
  * 
  */
-exports.getRankByPUUID = async (req, res) => { // Define get request route
+exports.getRankByPuuid = async (req, res) => { // Define get request route
     // Debugging: Print request in console
     console.log('Requesting rank by PUUID:');
     
     // Request parameters
-    const PUUID = req.params.PUUID;
+    const puuid = req.params.puuid;
 
     // Try to fetch data through API
     try {
         // Contruct request and get response
         const response = await axios.get(
             // Formatted API url to include parameters
-            `https://na1.api.riotgames.com/lol/league/v4/entries/by-puuid/${PUUID}`,
+            `https://na1.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}`,
             // Header: API key
             {headers: {'X-Riot-Token': process.env.RIOT_API_KEY}}
         );

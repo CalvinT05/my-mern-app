@@ -8,16 +8,17 @@
 const express = require('express');
 const router = express.Router();
 
+// Import controller functions from league-controller.js
 const {
-    getAccountByRiotID,
-    getSummonerByPUUID,
-    getRankByPUUID,
+    getAccountByRiotId,
+    getSummonerByPuuid,
+    getRankByPuuid
 } = require('../controllers/league-controller');
 
-// API routes from league-controller.js
-router.get('/account/:gameName/:tagLine', getAccountByRiotID);
-router.get('/summoner/:PUUID', getSummonerByPUUID);
-router.get('/rank/:PUUID', getRankByPUUID);
+// API routes
+router.get('/account/:gameName/:tagLine', getAccountByRiotId);
+router.get('/summoner/:PUUID', getSummonerByPuuid);
+router.get('/rank/:PUUID', getRankByPuuid);
 
 // Export routes to other parts of program
 module.exports = router;
