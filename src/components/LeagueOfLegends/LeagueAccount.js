@@ -6,7 +6,7 @@
 
 // Imports
 import React, {useEffect, useState} from 'react';
-import {getLeagueAccountData} from '../services/leagueService';
+import {getLeagueAccountData} from '../../services/leagueService';
 
 /*
  * Props: gameName, tagLine

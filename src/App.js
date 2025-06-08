@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
-import LeagueAccount from './components/LeagueAccount';
+import {
+  LeagueAccount,
+  MasteryCrest,
+  RankedEmblem
+} from './components/LeagueOfLegends';
 
 function App() {
   const [gameName, setGameName] = useState('');
@@ -24,6 +28,9 @@ function App() {
       <button onClick={() => setSubmitted(true)}>Search</button>
 
       {submitted && <LeagueAccount gameName={gameName} tagLine={tagLine} />}
+
+      <RankedEmblem rankRaw="DIAMOND" />
+      <MasteryCrest masteryLevelRaw={10} />
     </div>
   );
 }
