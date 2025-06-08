@@ -12,13 +12,20 @@ const router = express.Router();
 const {
     getAccountByRiotId,
     getSummonerByPuuid,
-    getRankByPuuid
+    getRankByPuuid,
+    getMasteryByPuuid,
+    getMatchIdsByPuuid,
+    getMatchByMatchId
 } = require('../controllers/league-controller');
 
 // API routes
 router.get('/account/:gameName/:tagLine', getAccountByRiotId);
-router.get('/summoner/:PUUID', getSummonerByPuuid);
-router.get('/rank/:PUUID', getRankByPuuid);
+router.get('/summoner/:puuid', getSummonerByPuuid);
+router.get('/rank/:puuid', getRankByPuuid);
+router.get('/mastery/:puuid', getMasteryByPuuid);
+router.get('/match-ids/:puuid', getMatchIdsByPuuid);
+router.get('/match/:matchId', getMatchByMatchId);
+
 
 // Export routes to other parts of program
 module.exports = router;

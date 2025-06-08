@@ -98,7 +98,7 @@ exports.getSummonerByPuuid = async (req, res) => { // Define get request route
 };
 
 /*
- * Get rank stats
+ * Get ranked stats
  * Inputs: PUUID
  * Returns: .json containing rank stats
  * 
@@ -130,3 +130,53 @@ exports.getRankByPuuid = async (req, res) => { // Define get request route
         res.status(err.response?.status || 500).json({error: err.message});
     }
 };
+
+/*
+ * Get champion mastery stats
+ * Inputs: PUUID
+ * Returns: .json containing champion mastery stats
+ * 
+ */
+exports.getMasteryByPuuid = async (req, res) => { // Define get request route
+    // Debugging: Print request in console
+    console.log('Requesting rank by PUUID:');
+    
+    // Request parameters
+    const puuid = req.params.puuid;
+
+    // Try to fetch data through API
+    try {
+        // Contruct request and get response
+        const response = await axios.get(
+            // Formatted API url to include parameters
+            `https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}`,
+            // Header: API key
+            {headers: {'X-Riot-Token': process.env.RIOT_API_KEY}}
+        );
+
+        // Debugging: Print response in console
+        console.log('API response:', JSON.stringify(response.data, null, 2));
+
+        // Send back data to caller in JSON
+        res.json(response.data);
+    } catch (err) {
+        // Send back error/response code to caller if failed
+        res.status(err.response?.status || 500).json({error: err.message});
+    }
+};
+
+/*
+ * Get match history IDs
+ * Inputs: PUUID, optional - startTime, endTime, queue, type, start, count
+ * Returns: .json containing list of match IDs
+ * 
+ */
+exports.getMatchIdsByPuuid = async (req, res) => {};
+
+/*
+ * Get match by match ID
+ * Inputs: Match ID
+ * Returns: .json containing match details
+ * 
+ */
+exports.getMatchByMatchId = async (req, res) => {};
