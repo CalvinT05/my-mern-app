@@ -20,7 +20,7 @@ function RankedEmblem({rankRaw}) {
       <div>
           <img
               src={`/league-of-legends/ranked-emblems/${rank}.png`}
-              alt={`${rankName} Emblem`}
+              alt={`${rankName} Ranked Emblem`}
               style={{width: '100px', height: '100px'}}
           />
       </div>
