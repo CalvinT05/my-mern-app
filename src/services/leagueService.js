@@ -23,20 +23,27 @@ import axios from 'axios';
 export async function getLeagueAccountData(gameName, tagLine) {
   try {
     // Fetch Riot account info
-    const accountRes = await axios.get(`/api/league/account/${gameName}/${tagLine}`); // getAccountByRiotID
-    const puuid = accountRes.data.puuid; // Extract PUUID from account data
+    const accountData = await axios.get(`/api/league/account/${gameName}/${tagLine}`); // getAccountByRiotID
+    const puuid = accountData.data.puuid; // Extract PUUID from account data
 
     // Fetch other data with PUUID
-    const [summonerRes, rankRes] = await Promise.all([ // Promise.all to fetch in parallel (faster than sequential)
+    const [
+      summonerData,
+      rankedData,
+      masteryData
+    ] = await Promise.all([ // Promise.all to fetch in parallel (faster than sequential)
+      
       axios.get(`/api/league/summoner/${puuid}`), // getSummonerByPUUID
-      axios.get(`/api/league/rank/${puuid}`) // getRankByPUUID
+      axios.get(`/api/league/rank/${puuid}`), // getRankByPUUID
+      axios.get(`/api/league/mastery/${puuid}`) // getMasteryByPUUID
     ]);
 
     // Return all data
     return {
-      account: accountRes.data,
-      summoner: summonerRes.data,
-      rank: rankRes.data
+      account: accountData.data,
+      summoner: summonerData.data,
+      ranked: rankedData.data,
+      mastery: masteryData.data
     };
   } catch (error) {
     // Handle errors and rethrow them
