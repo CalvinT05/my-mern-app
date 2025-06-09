@@ -1,17 +1,12 @@
 /*
- * Ranked Emblem React Component
- *
- */
-
-import React from 'react';
-
-/*
+ * Mastery Crest React Component
+ * 
  * Props: Raw mastery level
  * Renders the mastery crest based on the provided mastery 
  * level
  * 
  */
-function RankedEmblem({masteryLevelRaw}) {
+export default function MasteryCrest({masteryLevelRaw}) {
     // Get the mastery level for the image, defaulting to 0 if less than 4
     const masteryLevel = (masteryLevelRaw > 10) ? 10 : masteryLevelRaw;
     
@@ -26,5 +21,3 @@ function RankedEmblem({masteryLevelRaw}) {
       </div>
     );
 }
-
-export default RankedEmblem;
