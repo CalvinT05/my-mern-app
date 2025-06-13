@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import {getLeagueAccountData} from './services/leagueService';
+import React, { useState } from 'react';
+import { getLeagueAccountData } from './services/leagueService';
 import {
   MasteryCrest,
   RankedEmblem,
   MiniRankedEmblem,
-  SummonerIcon
+  SummonerIcon,
+  LeagueCard
 } from './components/LeagueOfLegends';
 
-
-function App() {
+export default function App() {
   const [gameName, setGameName] = useState('');
   const [tagLine, setTagLine] = useState('');
   const [leagueData, setLeagueData] = useState({
@@ -18,11 +18,11 @@ function App() {
     mastery: null
   });
 
-  const [error, setError] = useState(null);         // Holds error
-  const [loading, setLoading] = useState(false);    // Handles loading state
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const leagueSearch = async () => {
-    if(!gameName || !tagLine) {
+    if (!gameName || !tagLine) {
       setError('Please enter both Game Name and Tag Line');
       return;
     }
@@ -37,13 +37,19 @@ function App() {
     });
 
     try {
-      setLeagueData(await getLeagueAccountData(gameName, tagLine));
+      const data = await getLeagueAccountData(gameName, tagLine);
+      setLeagueData(data);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Unknown error occurred');
     } finally {
       setLoading(false);
     }
   };
+
+  // Safely extract data
+  const profileIconId = leagueData?.summoner?.profileIconId;
+  const rankedSolo = leagueData?.ranked?.find(r => r.queueType === 'RANKED_SOLO_5x5');
+  const firstMastery = leagueData?.mastery?.[0];
 
   return (
     <div className="App">
@@ -63,28 +69,61 @@ function App() {
       <button onClick={leagueSearch}>Search</button>
 
       {loading && <div>Loading...</div>}
-      {error && <div style={{color: 'red'}}>Error: {error}</div>}
+      {error && <div style={{ color: 'red' }}>Error: {error}</div>}
 
-      <h2>Account Info</h2>
-      <pre>{JSON.stringify(leagueData.account, null, 2)}</pre>
+      {/* ACCOUNT */}
+      {leagueData.account && (
+        <>
+          <h2>Account Info</h2>
+          <pre>{JSON.stringify(leagueData.account, null, 2)}</pre>
+        </>
+      )}
 
-      <h2>Summoner Info</h2>
-      <pre>{JSON.stringify(leagueData.summoner, null, 2)}</pre>
+      {/* SUMMONER */}
+      {leagueData.summoner && (
+        <>
+          <h2>Summoner Info</h2>
+          <pre>{JSON.stringify(leagueData.summoner, null, 2)}</pre>
+          {profileIconId !== undefined && <SummonerIcon iconId={profileIconId} />}
+        </>
+      )}
 
-      <SummonerIcon iconId={leagueData.summoner.profileIconId} />
+      {/* RANKED */}
+      {leagueData.ranked && (
+        <>
+          <h2>Rank Info</h2>
+          <pre>{JSON.stringify(leagueData.ranked, null, 2)}</pre>
+          {rankedSolo?.tier && (
+            <>
+              <RankedEmblem rankRaw={rankedSolo.tier} />
+              <MiniRankedEmblem rankRaw={rankedSolo.tier} />
+            </>
+          )}
+        </>
+      )}
 
-      <h2>Rank Info</h2>
-      <pre>{JSON.stringify(leagueData.ranked, null, 2)}</pre>
+      {/* MASTERY */}
+      {leagueData.mastery && (
+        <>
+          <h2>Mastery Info</h2>
+          <pre>{JSON.stringify(leagueData.mastery, null, 2)}</pre>
+          {firstMastery?.championPoints !== undefined && (
+            <MasteryCrest masteryLevelRaw={firstMastery.championLevel} height='200px' width='200px'/>
+          )}
+        </>
+      )}
 
-      <RankedEmblem rankRaw={leagueData.ranked[0].tier} />
-      <MiniRankedEmblem rankRaw={leagueData.ranked[0].tier} />
+      {/* LEAGUE CARD */}
+      <LeagueCard
+        iconId={profileIconId}
+        level={551}
+        summonerName={"ohareshairs"}
+        tag={"Swain"}
+        rankRaw={"emerald"}
+        rankName={"Emerald 2"}
+        lp={91}
+      />
 
-      <h2>Mastery Info</h2>
-      <pre>{JSON.stringify(leagueData.mastery, null, 2)}</pre>
-
-      <MasteryCrest masteryLevelRaw={leagueData.mastery[0].championPoints} />
     </div>
   );
 }
-
-export default App;

@@ -6,7 +6,8 @@
  * level
  * 
  */
-export default function SummonerIcon({iconId}) {
+
+export default function SummonerIcon({iconId, height = '100px', width = '100px'}) {
     // Build the icon URL from the provided icon ID
     const iconUrl = `https://ddragon.leagueoflegends.com/cdn/15.11.1/img/profileicon/${iconId}.png`;
 
@@ -16,7 +17,7 @@ export default function SummonerIcon({iconId}) {
           <img
               src={iconUrl}
               alt={`Summoner Icon ${iconId}`}
-              style={{width: '100px', height: '100px'}}
+              style={{width, height}}
           />
       </div>
     );
