@@ -21,3 +21,4 @@ export {default as MasteryCrest} from './MasteryCrest';
 export {default as RankedEmblem} from './RankedEmblem';
 export {default as MiniRankedEmblem} from './MiniRankedEmblem';
 export {default as SummonerIcon} from './SummonerIcon';
+export {default as LeagueCard} from './LeagueCard';

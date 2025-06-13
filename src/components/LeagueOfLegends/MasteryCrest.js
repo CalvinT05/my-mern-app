@@ -6,7 +6,8 @@
  * level
  * 
  */
-export default function MasteryCrest({masteryLevelRaw}) {
+
+export default function MasteryCrest({masteryLevelRaw, height = '100px', width = '100px'}) {
     // Get the mastery level for the image, defaulting to 0 if less than 4
     const masteryLevel = (masteryLevelRaw > 10) ? 10 : masteryLevelRaw;
     
@@ -16,7 +17,7 @@ export default function MasteryCrest({masteryLevelRaw}) {
           <img
               src={`/league-of-legends/mastery-crests/mastery-${masteryLevel}.png`}
               alt={`Mastery ${masteryLevel} Crest`}
-              style={{width: '100px', height: '100px'}}
+              style={{width, height}}
           />
       </div>
     );
