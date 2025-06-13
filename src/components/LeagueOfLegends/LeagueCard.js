@@ -15,7 +15,7 @@ export default function LeagueCard({
       {/* Summoner Icon + Level badge */}
       <div className="relative">
         <SummonerIcon iconId={iconId} height="64px" width="64px" />
-        <span className="absolute -bottom-1 -right-1 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+        <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
           {level}
         </span>
       </div>
