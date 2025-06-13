@@ -1,0 +1,13 @@
+.tab-buttons button {
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.tab-buttons button:hover {
+  background-color: #ddd;
+}
+
+.tab-content {
+  margin-top: 10px;
+}
