@@ -4,13 +4,13 @@
 
 'use strict'; // strict mode
 
-// Imports
-require('dotenv').config(); // imports config
 const app = require('./app'); // imports app
+const { port, connectDB } = require('./config'); // imports config
 
-const PORT = process.env.PORT; // port set from config
+// Connect to MongoDB
+connectDB();
 
 // Run server
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
 });

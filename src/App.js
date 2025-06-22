@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LeaguePage from "./pages/LeaguePage";
-import OverwatchPage from "./pages/OverwatchPage";
-import OtherPage from "./pages/OtherPage";
-import Tabs from "./components/tabs";
+import {
+  LeaguePage,
+  OverwatchPage,
+  OtherPage
+} from "./pages";
+import Tabs from "./components/Tabs/Tabs";
 
 function App() {
   return (
