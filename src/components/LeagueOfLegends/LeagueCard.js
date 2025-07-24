@@ -5,11 +5,20 @@ export default function LeagueCard({
   iconId,
   level,
   summonerName,
-  tag,
-  rankRaw,
-  rankName,
+  tagLine,
+  tier,
+  rank,
   lp
 }) {
+  let rankName = (tier ?? 'UNRANKED').toLowerCase(); // Default to 'UNRANKED' if no rank is provided
+  rankName = rankName.charAt(0).toUpperCase() + rankName.slice(1); // Capitalize the first letter of the rank
+
+  if (!['Unranked', 'Master', 'Grandmaster', 'Challenger'].includes(rankName)) {
+    rankName = rankName + ' ' + rank;
+  }
+
+  const LPDisplay = lp ? lp + ' LP' : '';
+
   return (
     <div className="flex items-center bg-gray-900 p-4 rounded-2xl shadow-lg max-w-md">
       {/* Summoner Icon + Level badge */}
@@ -23,7 +32,7 @@ export default function LeagueCard({
       {/* Name and Tag */}
       <div className="ml-4">
         <h2 className="text-white font-semibold text-lg">
-          {summonerName} <span className="text-gray-400">#{tag}</span>
+          {summonerName} <span className="text-gray-400">#{tagLine}</span>
         </h2>
       </div>
 
@@ -32,10 +41,10 @@ export default function LeagueCard({
 
       {/* Rank emblem and LP */}
       <div className="flex items-center">
-        <RankedEmblem rankRaw={rankRaw} height="48px" width="48px" />
+        <RankedEmblem rankRaw={tier} height="48px" width="48px" />
         <div className="ml-2 text-right">
           <p className="text-white font-medium text-sm">{rankName}</p>
-          <p className="text-gray-400 text-xs">{lp} LP</p>
+          <p className="text-gray-400 text-xs">{LPDisplay}</p>
         </div>
       </div>
     </div>

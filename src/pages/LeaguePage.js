@@ -47,6 +47,9 @@ const LeaguePage = () => {
     }
   };
 
+  const riotName = leagueData?.account?.gameName;
+  const riotTagLine = leagueData?.account?.tagLine;
+  const leagueLevel = leagueData?.summoner?.summonerLevel;
   const profileIconId = leagueData?.summoner?.profileIconId;
   const rankedSolo = leagueData?.ranked?.find(r => r.queueType === 'RANKED_SOLO_5x5');
   const firstMastery = leagueData?.mastery?.[0];
@@ -124,12 +127,12 @@ const LeaguePage = () => {
       <div className="mt-10">
         <LeagueCard
           iconId={profileIconId}
-          level={551}
-          summonerName={"ohareshairs"}
-          tag={"Swain"}
-          rankRaw={"emerald"}
-          rankName={"Emerald 2"}
-          lp={91}
+          level={leagueLevel}
+          summonerName={riotName}
+          tagLine={riotTagLine}
+          rank={rankedSolo?.rank}
+          tier={rankedSolo?.tier}
+          lp={rankedSolo?.leaguePoints}
         />
       </div>
     </div>
